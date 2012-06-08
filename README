@@ -6,8 +6,7 @@ https://github.com/amazonwebservices/aws-sdk-for-php ) which is included.
 
 == How to use? ==
 * Grab a copy of the latest code: git://github.com/deadlyhifi/phpMyS3backup.git
-* Rename sample.config.inc.php to config.inc.php
-* Fill in the blanks for config.inc.php
+* Fill in your connection credentials in phpMyS3backup.php
 * Execute `php phpMyS3backup.php` and wait
 * When you get dropped back to the command line, check your S3
 * Done!

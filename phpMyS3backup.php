@@ -1,6 +1,19 @@
 <?php
+define('DB_HOST', '');											//EX: localhost
+define('DB_USER', '');											//EX: root
+define('DB_PASS', '');											//EX: AwesomeP4ssW0rd!
+define('SRV_NAME', php_uname("n"));								//Either: php_uname("n") OR 'my-personal-server-name'
+define('DEBUG_ON', FALSE);										//Either: TRUE or FALSE
 
-require_once 'config.inc.php';
+define('AWS_KEY', '');											// https://aws-portal.amazon.com/gp/aws/securityCredentials
+define('AWS_SECRET', '');										// https://aws-portal.amazon.com/gp/aws/securityCredentials
+define('BUCKET', '');											// Bucket to save to.
+
+date_default_timezone_set('Europe/London');						// Timezone, choose yours: http://uk3.php.net/manual/en/timezones.php
+
+// ********************************
+// Let's Go!
+// ********************************
 if(DEBUG_ON){error_reporting(-1);}
 $now = date("d-m-Y_H:i:s");
 syslog(LOG_INFO, "phpMyS3Backup - Starting run ID $now");
@@ -39,7 +52,8 @@ foreach($alldb as $db){
 // ********************************
 // Upload the files to S3
 // ********************************
-$aws = array( 	'key' => AWS_KEY,
+$aws = array(
+		'key' => AWS_KEY,
 		'secret' => AWS_SECRET,
 		'default_cache_config' => '',
 		'certificate_authority' => false
@@ -76,7 +90,6 @@ if(DEBUG_ON){
 // ********************************
 // Cleanup the local filesystem
 // ********************************
-
 system("rm -rf /tmp/{$now}/");
 deb("DONE");
 syslog(LOG_INFO, "phpMyS3Backup - completed run ID $now");
@@ -84,7 +97,6 @@ syslog(LOG_INFO, "phpMyS3Backup - completed run ID $now");
 // ********************************
 // Done!
 // ********************************
-
 function deb ($msg) {
 	if(DEBUG_ON) { print $msg . "\n"; }
 }
