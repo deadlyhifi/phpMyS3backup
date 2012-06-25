@@ -23,9 +23,9 @@ require_once 'AWSSDKforPHP/sdk.class.php';
 // Get list of databases
 // ********************************
 $alldb = array();
-$GLOBALS['con'] = mysqli_connect(DB_HOST, DB_USER, DB_PASS) or die("Cannot Connect to MySQL");
-$res = mysqli_query($GLOBALS['con'], "SHOW DATABASES;");
-while($row = mysqli_fetch_array($res)){
+$GLOBALS['con']= new PDO('mysql:host='.DB_HOST, DB_USER, DB_PASS);
+$res = $GLOBALS['con']->query("SHOW DATABASES");
+while($row = $res->fetch()) {
 	if($row['Database'] != "information_schema"){
 		$alldb[] = $row['Database'];
 		deb("Database found: {$row['Database']}");
