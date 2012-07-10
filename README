@@ -1,6 +1,6 @@
 == What is phpMyS3backup? ==
 phpMyS3backup is a PHP based tool that will backup a MySQL server to Amazon's
-S3 service ( http://aws.amazon.com/s3/ ). The tool requires php5-cli
+S3 service (http://aws.amazon.com/s3/). The tool requires php5-cli
 and mysqldump, it also uses the AWS SDK for PHP (
 https://github.com/amazonwebservices/aws-sdk-for-php ) which is included.
 
@@ -12,6 +12,18 @@ https://github.com/amazonwebservices/aws-sdk-for-php ) which is included.
 * Done!
 
 * Set it running with a cron job and rest easy as your databases are backed up while you sit with your feet up sipping coffee.
+* If you want backups to auto delete after a given time period then visit your S3 management console
+	* https://console.aws.amazon.com/s3/home
+	* Enter your backup bucket
+	* Click 'Properties'
+	* Click 'Lifecycle'
+	* Enter a name (e.g. `mysql backup expiration`)
+	* Under prefix enter 'mysql_backups' (or whatever you have set BACKUP_FOLDER to)
+	* Enter expiration time (e.g. 30 days) 
+
+=== Further Information on Object Expiry ===
+http://docs.amazonwebservices.com/AmazonS3/latest/dev/ObjectExpiration.html
+http://docs.amazonwebservices.com/AmazonS3/latest/UG/ObjectExpiration.html
 
 == How it works? ==
 Here's the short version of what this tool does:
@@ -24,11 +36,6 @@ Here's the short version of what this tool does:
 *** AES256 Encryption
 *** "Private" permissions (no sharing)
 * Delete the local backups
-
-== History ==
-2012-03-02 - Initial Release
-2012-02-24 - GitHub project started
-2012-06-07 - TdB edited it to suit me. The original is https://github.com/ShakataGaNai/phpMyS3backup
 
 == License ==
 === phpMyS3Backup - MIT License ===
